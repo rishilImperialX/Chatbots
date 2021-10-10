@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>College Chatbot</title>
+</head>
+<body>
+    <div id="college_chatbot">
+        <div id="header">
+            <img scrolling="no" src="/static/images/chatbot.png"/>
+            <label id="college_text">College Chatbot</label>
+        </div>
+        <div id="chatbox">
+           <p class="start_botText">Hello I'm your college bot assistant.<br/>Start typing something..</p>     
+        </div>
+    
+    </div>
+    <div id="tail_div">
+        <input type="text" class="send_message" size="64"
+        placeholder="send message...."
+        />
+        <img src="/static/images/send.png" id="send_message_icon"/>
+    </div>
+    <script>
+        async function delay(delayInms) {
+            return new Promise(resolve  => {
+              setTimeout(() => {
+                resolve(2);
+              }, delayInms);
+            });
+          }
+
+        function get_bot_response()
+        {
+            var rawText=$('.send_message').val();
+            var userTextHtml='<p class="userText"><span>'+rawText+'</span></p>';
+            $(".send_message").val("");
+            $("#college_chatbot").append(userTextHtml);
+            document.getElementById("tail_div").scrollIntoView({block: 'start', behavior: 'smooth'});
+
+            $.get('/get',{msg:rawText}).done(function(data){
+                var botHtml='<p class="botText"><span>'+data+'</span></p>';
+                var typing_text='<p class="typing_text">. . .bot is typing</p>';
+                $("#college_chatbot").append(typing_text);
+                async function sample() {
+                     let delayers = await delay(3100);
+                     $("#college_chatbot").append(botHtml);
+                     document.getElementById("tail_div").scrollIntoView({block:'start',behavior:'smooth'});
+                     console.log("Value at bot text:",$(".botText").val())
+                     $('.typing_text').hide();
+                     
+                  }
+                sample()
+            });
+        } 
+        $(".send_message").keypress(function(e){
+            if(e.which == 13){
+                get_bot_response();
+            }
+        });
+        $("#send_message_icon").click(function(){
+            get_bot_response();
+        })
+
+    </script>
+</body>
+</html>
