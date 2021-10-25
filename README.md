@@ -1,2 +1,3 @@
 # Chatbots
-User querying to the bot and appropriate response is  generated.
+A chatbot is a computer program that simulates human conversation through voice commands or text chats or both. Chatbot, short for chatterbot, is an artificial intelligence (AI) feature that can be embedded and used through any major messaging applications.” Chatbots attend to customers at all times of the day and week and are not limited by time or a physical location. This makes its implementation appealing to a lot of businesses that may not have the manpower or financial resources to keep employees working around the clock.
+![image](https://user-images.githubusercontent.com/92274267/138641395-84fccd94-4380-478b-ba74-728d1e92a8b1.png)
